@@ -8,7 +8,7 @@ from gensim.models.keyedvectors import KeyedVectors
 
 # Load word2vec model
 print "Loading model..."
-model = KeyedVectors.load_word2vec_format('models/glove_twitter_27B_25d.txt', binary=False)
+model = KeyedVectors.load_word2vec_format('../data/glove_twitter_27B_25d.txt', binary=False)
 print "Loading complete..."
 
 # Get default English stopwords and extend with punctuation
