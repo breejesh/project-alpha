@@ -6,7 +6,7 @@ antonymSet = {}
 
 # Build from local data set
 def buildAntonymSet():
-    f = open('antonymsVocab.csv', 'rU')
+    f = open('../data/antonymsVocab.csv', 'rU')
     for line in f:
         cell = line.split(",")
         antonymSet[cell[0]] = cell[1].rstrip('\n')
@@ -50,7 +50,6 @@ def main():
     replacer = AntonymReplacer()
     sent = "Donald Trump is not alive"
     sent_tokenized = word_tokenize(sent)
-    #print replacer.replace_negations(sent_tokenized)
     print(replacer.replace_negations(sent_tokenized))
     
 if __name__ == '__main__':
