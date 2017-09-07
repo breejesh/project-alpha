@@ -28,22 +28,21 @@ firebase.auth()
 db = firebase.database()
 user = '@sagarikaghose'
 
-def process_page(page):
-    # Insert pages tweets to DB code here
-    data = {}
-    tweet_of_user = {}
-    for tweet in page:
-        tweet_of_user[tweet.id] = tweet.text
-    data["users/" + user + "/"] = tweet_of_user 
-    db.update(data)
 
 def get_tweets():
     # get all data from twitter for a user
     i = 0
-    for page in Cursor(api.user_timeline, screen_name=user.lstrip('@'), count=200).pages(100):
+    data = {}
+    tweet_of_user = {}
+    for page in Cursor(api.user_timeline, screen_name=user.lstrip('@'), count=200).pages(50):
         print "Processing page..." + str(i)
         i += 1
-        process_page(page)
+        # Process each page
+        for tweet in page:
+            tweet_of_user[tweet.id] = tweet.text
+    data["users/" + user + "/"] = tweet_of_user
+    db.update(data)
+
 
 def main():
     # Get data from twitter
