@@ -4,6 +4,7 @@ from nltk import word_tokenize
 
 antonymSet = {}
 
+# Build from local data set
 def buildAntonymSet():
     f = open('antonymsVocab.csv', 'rU')
     for line in f:
