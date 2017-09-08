@@ -34,7 +34,7 @@ def get_tweets():
     i = 0
     data = {}
     tweet_of_user = {}
-    for page in Cursor(api.user_timeline, screen_name=user.lstrip('@'), count=200).pages(50):
+    for page in Cursor(api.user_timeline, screen_name=user.lstrip('@'), count=200).pages(1):
         print "Processing page..." + str(i)
         i += 1
         # Process each page
