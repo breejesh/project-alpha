@@ -4,11 +4,27 @@ import nltk.corpus
 import nltk.tokenize
 import nltk.stem.snowball
 import string
-from gensim.models.keyedvectors import KeyedVectors
+try:
+    from gensim.models.keyedvectors import KeyedVectors
+except: 
+    from gensim.models import Word2Vec
 
-# Load word2vec model
+# Load word2vec model (try catch due to version mismatch on server)
 print "Loading model..."
-model = KeyedVectors.load_word2vec_format('data/glove_twitter_27B_25d.txt', binary=False)
+try:
+    model = KeyedVectors.load_word2vec_format('data/glove_twitter_27B_25d.txt', binary=False)
+except:
+    try:
+        model = KeyedVectors.load_word2vec_format('../data/glove_twitter_27B_25d.txt', binary=False)
+    except:
+        try:
+            model = Word2Vec.load_word2vec_format('data/glove_twitter_27B_25d.txt', binary=False)
+        except:
+                model = Word2Vec.load_word2vec_format('../data/glove_twitter_27B_25d.txt', binary=False)
+            
+        
+    
+    
 print "Loading complete..."
 
 # Get default English stopwords and extend with punctuation
