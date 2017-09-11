@@ -14,17 +14,8 @@ print "Loading model..."
 try:
     model = KeyedVectors.load_word2vec_format('data/glove_twitter_27B_25d.txt', binary=False)
 except:
-    try:
-        model = KeyedVectors.load_word2vec_format('../data/glove_twitter_27B_25d.txt', binary=False)
-    except:
-        try:
-            model = Word2Vec.load_word2vec_format('data/glove_twitter_27B_25d.txt', binary=False)
-        except:
-                model = Word2Vec.load_word2vec_format('../data/glove_twitter_27B_25d.txt', binary=False)
+    model = Word2Vec.load_word2vec_format('data/glove_twitter_27B_25d.txt', binary=False)
             
-        
-    
-    
 print "Loading complete..."
 
 # Get default English stopwords and extend with punctuation
