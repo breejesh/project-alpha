@@ -4,11 +4,7 @@
 from flask import Flask
 from flask_restful import Resource, Api, reqparse
 from flask_cors import CORS
-<<<<<<< HEAD
-#import truenet
-=======
 import truenet
->>>>>>> 1fe1d5bbeca3c062d6bf6901544cf5f9a4acaf86
 
 app = Flask(__name__)
 CORS(app)
