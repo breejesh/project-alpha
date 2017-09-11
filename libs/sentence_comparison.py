@@ -105,3 +105,6 @@ def my_sentence_similarity(sentence1, sentence2):
     ratio = len(set(stems_a).intersection(stems_b)) / float(len(set(stems_a).union(stems_b)))
     return ratio
 
+def remove_stopwords(query):
+    keywords = [token.lower() for token in query if token.lower() not in stopwords]
+    print keywords
