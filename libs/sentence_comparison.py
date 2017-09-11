@@ -6,7 +6,7 @@ import nltk.stem.snowball
 import string
 try:
     from gensim.models.keyedvectors import KeyedVectors
-except: 
+except:
     from gensim.models import Word2Vec
 
 # Load word2vec model (try catch due to version mismatch on server)
@@ -14,8 +14,8 @@ print "Loading model..."
 try:
     model = KeyedVectors.load_word2vec_format('data/glove_twitter_27B_25d.txt', binary=False)
 except:
-    model = Word2Vec.load_word2vec_format('data/glove_twitter_27B_25d.txt', binary=False)
-            
+    model = Word2Vec.load_word2vec_format('/home/ryuzaki/mysite/data/glove_twitter_27B_25d.txt', binary=False)
+
 print "Loading complete..."
 
 # Get default English stopwords and extend with punctuation
@@ -39,7 +39,7 @@ def penn_to_wn(tag):
     if tag.startswith('R'):
         return 'r'
     return None
- 
+
 def tagged_to_synset(word, tag):
     wn_tag = penn_to_wn(tag)
     if wn_tag is None:
@@ -83,7 +83,7 @@ def word_relevant_to_sentence(sentence, word, threshold = 0.6):
     try:
         best_score = 0
         for ss in synsets:
-            print synsetsW[0], ss, synsetsW[0].wup_similarity(ss) 
+            print synsetsW[0], ss, synsetsW[0].wup_similarity(ss)
             if synsetsW[0].wup_similarity(ss) > best_score:
                 best_score = synsetsW[0].wup_similarity(ss)
         return best_score >= threshold
