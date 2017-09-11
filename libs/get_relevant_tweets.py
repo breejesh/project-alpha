@@ -14,6 +14,7 @@ def find_all(keywords):
     relevant_tweets = []
     words = combination(keywords)
     for user in users:
+        flag = 0
         data = db.child("users").child(user).get()
         try:
             i = len(words)
@@ -25,9 +26,11 @@ def find_all(keywords):
                     # In each tweets find keywords
                     if all(keyword in tweet for keyword in words[i]):
                         relevant_tweets.append(tweet)
+                        flag = 1
+                    if flag == 1:
                         break
+            if flag == 0:
+                relevant_tweets.append(' ')
         except Exception, e:
             print str(user) + " not found"
     return relevant_tweets
-
-
