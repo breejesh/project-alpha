@@ -11,22 +11,23 @@ users = ["@sardesairajdeep","@BDUTT","@sagarikaghose","@vikramchandra","@asharma
 
 def process_new_tweets():
     # Get tweet for particular screen name
+    '''
     data = db.child("users").child("@sagarikaghose").get()
     print type(data.val())
     print data.val()
-    # for item in data.val():
-    #    print item
-    exit(0)    
+    '''
     for user in users:
         # Fetch  tweet id from Firebase
         try:
             data = db.child("users").child(user).get()
+            print "Fetched data of "
             for page in Cursor(api.user_timeline, screen_name=user.lstrip('@'), count=200).pages(20):
                 for tweet  in page:
                     # If exists in Firebase
                     for key in data.val():
+                        print key
                         if tweet.id == key:
-                            print "In Firebase"
+                            print "In Firebase" 
                             break
                     # Firebase code here
                     recent_tweet = {tweet.id : tweet.text}

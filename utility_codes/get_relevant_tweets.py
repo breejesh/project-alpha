@@ -16,7 +16,7 @@ def get_relevant_tweets():
     '''
     for user in users:
         data = db.child("users").child(user).get()
-        print "Fetched data.."
+        print "Fetched data of " + str(user)
         print type(data.val())
         try:
             for i, (key, value) in enumerate(data.val().iteritems()):
