@@ -6,7 +6,7 @@ import re
 users = ["@sardesairajdeep","@BDUTT","@sagarikaghose","@vikramchandra","@asharma","@SachinKalbag","@madversity","@cricketwallah","@Kanchangupta","@rahulkanwal","@timesofindia","@ndtv","@IndiaToday","@IndianExpress","@the_hindu","@CNNnews18","@firstpost","@bsindia","@dna","@DeccanChronicle","@Oneindia","@FinancialXpress","@BreakingNews","@BBCBreaking","@cnnbrk","@WSJbreakingnews","@CBSNews"]
 
 # Returns a list of relevant tweets as list based on keyword
-def get_relevant_tweets(keywords):
+def find_all(keywords):
     # Create a search pattern
     relevant_tweets = []
     search_pattern = keywords[0]
@@ -19,6 +19,7 @@ def get_relevant_tweets(keywords):
                 # In each tweets find keywords
                 if(re.search(search_pattern, value, flags=re.IGNORECASE)):
                     relevant_tweets.append(value)
+                    print value
         except Exception, e:
             print str(user) + " not found"
     return relevant_tweets
