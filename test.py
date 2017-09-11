@@ -1,2 +1,6 @@
-from libs import sentence_comparison
-print "Test"
+import truenet
+
+text = "Donald Trump is dead"
+
+print truenet.analyze(text)
+
