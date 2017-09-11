@@ -13,13 +13,16 @@ def get_relevant_tweets(keywords):
     for i in range(1, len(keywords)):
         search_pattern += ('|' + keywords[i])
     for user in users:
+        print user
         data = db.child("users").child(user).get()
         try:
             for i, (key, value) in enumerate(data.val().iteritems()):
                 # In each tweets find keywords
                 if(re.search(search_pattern, value, flags=re.IGNORECASE)):
                     relevant_tweets.append(value)
+                    break
         except Exception, e:
             print str(user) + " not found"
     return relevant_tweets
+
 
