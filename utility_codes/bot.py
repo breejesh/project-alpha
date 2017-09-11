@@ -20,9 +20,9 @@ def process_new_tweets():
         # Fetch  tweet id from Firebase
         try:
             data = db.child("users").child(user).get()
-            print "Fetched data of "
+            print "Fetched data of " + str(user)
             for page in Cursor(api.user_timeline, screen_name=user.lstrip('@'), count=200).pages(20):
-                for tweet  in page:
+                for tweet in page:
                     # If exists in Firebase
                     for key in data.val():
                         print key
