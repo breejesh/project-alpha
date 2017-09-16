@@ -5,7 +5,7 @@ import watson_developer_cloud.natural_language_understanding.features.v1 as Feat
 class Response(object):
     def __init__(self, j):
         self.__dict__ = json.loads(j)
-    
+
 natural_language_understanding = NaturalLanguageUnderstandingV1(
   username="9ebd6c29-f3f3-462a-800d-764229422282",
   password="FJVM0P5ccuFP",
@@ -33,5 +33,5 @@ def analyze(query, value):
     response = watson_analyses(query)
     respDict = json.loads(json.dumps(response))
     respDict['percentage'] = value
-    return json.dumps(respDict)
+    return respDict
 
