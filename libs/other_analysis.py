@@ -18,12 +18,12 @@ def watson_analyses(query):
         Features.Entities(
           emotion=True,
           sentiment=True,
-          limit=2
+          limit=4
         ),
         Features.Keywords(
           emotion=True,
           sentiment=True,
-          limit=2
+          limit=4
         )
       ]
     )
