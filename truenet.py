@@ -17,6 +17,7 @@ def analyze(query):
     #return other_analysis.analyze(query, percentage)
 
 def mean(values):
+    avg = [8, 6, 7, 5, 8, 8, 4, 5]
     sum = 0
     count = 0
     for x in values:

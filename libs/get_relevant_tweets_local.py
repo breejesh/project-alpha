@@ -5,7 +5,6 @@ import json
 import re
 
 users = ["@timesofindia","@ndtv","@IndiaToday","@CNNnews18","@bsindia","@dna","@BreakingNews","@BBCBreaking"]
-avg = [8, 6, 7, 5, 8, 8, 4, 5]
 def combination(s):
     return [[s[j] for j in xrange(len(s)) if (i&(1<<j))] for i in xrange(1<<len(s))]
 
