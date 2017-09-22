@@ -19,4 +19,4 @@ for name in users:
     data["users/" + name + "/"] = {"0" : 0}
 print data
 print type(data)
-db.update(data)
+db.update({"users" : 0})
