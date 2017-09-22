@@ -34,7 +34,8 @@ def tagged_to_synset(word, tag):
     try:
         return wn.synsets(word, wn_tag)[0].lemmas()[0].name()
     except:
-        if tag == 'NNP' or tag == 'NN':
+        #print word, tag
+        if tag == 'NNP' or tag == 'NN' or tag == 'JJ':
             return word
         return None
 
@@ -75,14 +76,14 @@ def my_sentence_similarity(sentence1, sentence2):
     synsets2 = [tagged_to_synset(*tagged_word) for tagged_word in sentence2]
     synsets1 = [ss for ss in synsets1 if ss]
     synsets2 = [ss for ss in synsets2 if ss]
-    print synsets1, synsets2
+    #print synsets1, synsets2
     if set(synsets1) <= set(synsets2):
         return 0.7
     tokens_a = [token.lower() for token in synsets1 \
                     if token.lower() not in stopwords]
     tokens_b = [token.lower() for token in synsets2 \
                     if token.lower() not in stopwords]
-    print tokens_a, tokens_b
+    #print tokens_a, tokens_b
     stems_a = [stemmer.stem(token) for token in tokens_a]
     stems_b = [stemmer.stem(token) for token in tokens_b]
     #print stems_a, stems_b

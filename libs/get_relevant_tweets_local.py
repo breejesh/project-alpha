@@ -20,7 +20,11 @@ def load_data():
                 json_data = open('data/' + user.lstrip('@') + '.json').read()
             data = json.loads(json_data)
             for i in range(len(data)):
-                user_tweet[data[i]['id']] = data[i]['text']
+                text = data[i]['text']
+                text = text.lower().encode('utf-8')
+                text = re.sub(r"http\S+", '', text)
+                text = re.sub("[^a-zA-Z0-9\n]", " ", text)
+                user_tweet[data[i]['id']] = text
             tweet[user] = user_tweet
     except Exception, e:
         print e
@@ -39,7 +43,7 @@ def find_all(keywords):
         try:
             i = len(words)
             while(True):
-                print words[i - 1]
+                #print words[i - 1]
                 if(i == 1):
                     break
                 i -= 1
@@ -47,8 +51,6 @@ def find_all(keywords):
                     continue
                 for tweet_id, tweet in data[user].iteritems():
                     # In each tweets find keywords
-                    tweet = tweet.lower()
-                    tweet = re.sub("[@$%!,.#$^&'\"~`{}\[\]()]", " ", tweet)
                     new_tweet = tweet.split(" ")
                     
                     if set(words[i]) < set(new_tweet) :

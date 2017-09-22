@@ -23,7 +23,7 @@ print "db cleared"
 def process_text(text):
     text = text.lower().encode('utf-8')
     text = re.sub(r"http\S+", '', text)
-    text = re.sub("[@$%!,.#$^&'\"~`-_{}\[\]()]", " ", text)
+    text = re.sub("[^a-zA-Z0-9\n]", " ", text)
     return text
 
 j = 0
