@@ -4,19 +4,6 @@ import nltk.corpus
 import nltk.tokenize
 import nltk.stem.snowball
 import string
-try:
-    from gensim.models.keyedvectors import KeyedVectors
-except:
-    from gensim.models import Word2Vec
-
-# Load word2vec model (try catch due to version mismatch on server)
-print "Loading model..."
-try:
-    model = KeyedVectors.load_word2vec_format('data/glove_twitter_27B_25d.txt', binary=False)
-except:
-    model = Word2Vec.load_word2vec_format('/home/ryuzaki/mysite/data/glove_twitter_27B_25d.txt', binary=False)
-
-print "Loading complete..."
 
 # Get default English stopwords and extend with punctuation
 stopwords = nltk.corpus.stopwords.words('english')
@@ -60,18 +47,6 @@ def ttsynset(word, tag):
     except:
         return None
 
-def word_semantics(sentence, word, threshold = 0.6):
-    best_score = 0
-    for s in sentence:
-        s = str(s)
-        try:
-            score = model.similarity(word, s)
-        except:
-            score = 1
-        if score > best_score:
-            best_score = score
-    return best_score >= threshold
-
 def word_relevant_to_sentence(sentence, word, threshold = 0.6):
     sentence = pos_tag(word_tokenize(sentence))
     word = pos_tag(word_tokenize(word))
@@ -100,11 +75,14 @@ def my_sentence_similarity(sentence1, sentence2):
     synsets2 = [tagged_to_synset(*tagged_word) for tagged_word in sentence2]
     synsets1 = [ss for ss in synsets1 if ss]
     synsets2 = [ss for ss in synsets2 if ss]
+    print synsets1, synsets2
+    if set(synsets1) <= set(synsets2):
+        return 0.7
     tokens_a = [token.lower() for token in synsets1 \
                     if token.lower() not in stopwords]
     tokens_b = [token.lower() for token in synsets2 \
-                    if token.lower() not in stopwords if word_semantics(tokens_a, token.lower())]
-    #print tokens_a, tokens_b
+                    if token.lower() not in stopwords]
+    print tokens_a, tokens_b
     stems_a = [stemmer.stem(token) for token in tokens_a]
     stems_b = [stemmer.stem(token) for token in tokens_b]
     #print stems_a, stems_b

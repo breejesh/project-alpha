@@ -9,12 +9,12 @@ def analyze(query):
     tweets = tweets_db.find_all(keywords)
     values = []
     for tweet in tweets:
-        print tweet['text']
-        values.append(sc.my_sentence_similarity(query, tweet['text']))
+        values.append(sc.my_sentence_similarity(query, tweet))
         print values
     mean_value = mean(values)
     percentage = mean_value * 100 # Some processing
-    return other_analysis.analyze(query, percentage)
+    return percentage
+    #return other_analysis.analyze(query, percentage)
 
 def mean(values):
     sum = 0
