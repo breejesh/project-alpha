@@ -17,15 +17,18 @@ def analyze(query):
     #return other_analysis.analyze(query, percentage)
 
 def mean(values):
-    avg = [8, 6, 7, 5, 8, 8, 4, 5]
+    users = ["@timesofindia","@ndtv","@IndiaToday","@CNNnews18","@bsindia","@dna","@BreakingNews","@BBCBreaking"]
+    avg = [80, 50, 75, 40, 70, 80, 20, 10]
     sum = 0
     count = 0
+    denom = 0
     for x in values:
-        sum += x
+        sum += (x + 0.1) * avg[count]
+        denom += avg[count]
         count += 1
     if count == 0:
         return 0
-    return float(sum)/count
+    return float(sum)/denom
 
 '''
 def match_sentences(query, tweets):
