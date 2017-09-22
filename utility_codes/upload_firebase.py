@@ -2,6 +2,7 @@ import pyrebase
 import json
 import os
 import sys
+import re
 # from connection import db
 
 # Firebase connection
@@ -18,6 +19,13 @@ clear_stuff = {}
 clear_stuff["users"] = 0
 db.update(clear_stuff)
 print "db cleared"
+
+def process_text(text):
+    text = text.lower().encode('utf-8')
+    text = re.sub(r"http\S+", '', text)
+    text = re.sub("[@$%!,.#$^&'\"~`-_{}\[\]()]", " ", text)
+    return text
+
 j = 0
 try:
     files = [f for f in os.listdir('.') if os.path.isfile(f)]
@@ -32,17 +40,11 @@ try:
                 j += 1
                 if j % 5000 == 0:
                     print j
-                db_item = [data[i]['text'], data[i]['likes'], data[i]['retweets']]
+                db_item = [process_text(data[i]['text']), data[i]['likes'], data[i]['retweets']]
                 tweet[data[i]['id']] = db_item
                 # item = {data[i]['id'] : db_item}
             db.child("users").child(f.rstrip('.json')).set(tweet)
             print "Done"
-    '''
-    all_tweets["users/" + user + "/"] = tweet
-    print "Updating.."
-    db.update(all_tweets)
-    print "Updated!"
-    '''
 except Exception, e:
     print e
 print "Done"
