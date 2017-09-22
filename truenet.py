@@ -1,14 +1,17 @@
 from libs import other_analysis
 from libs import corpus
-from libs import sentence_comparison
-#from libs import himanshu
+from libs import sentence_comparison as sc
+from libs import get_relevant_tweets_local as tweets_db
 
 def analyze(query):
     keywords = corpus.remove_stopwords(query)
     print keywords
-    #tweets = get_relevant_tweets(keywords)
-    #values = match_sentences(query, tweets)
-    values = [6, 9, 1, 2, 3, 2, 5]
+    tweets = tweets_db.find_all(keywords)
+    values = []
+    for tweet in tweets:
+        print tweet['text']
+        values.append(sc.my_sentence_similarity(query, tweet['text']))
+        print values
     mean_value = mean(values)
     percentage = mean_value * 100 # Some processing
     return other_analysis.analyze(query, percentage)
@@ -19,6 +22,8 @@ def mean(values):
     for x in values:
         sum += x
         count += 1
+    if count == 0:
+        return 0
     return float(sum)/count
 
 '''
