@@ -12,8 +12,12 @@ def combination(s):
 def load_data():
     tweet = {}
     print "Loading pickle file.."
-    with open('data/tweet_data.pickle', 'rb') as handle:
-        tweet = pickle.load(handle)
+    try:
+        with open('data/tweet_data.pickle', 'rb') as handle:
+            tweet = pickle.load(handle)
+    except:
+        with open('/home/ryuzaki/mysite/data/tweet_data.pickle', 'rb') as handle:
+            tweet = pickle.load(handle)        
     print "Pickle file loaded!"
     return tweet
 
