@@ -12,26 +12,30 @@ natural_language_understanding = NaturalLanguageUnderstandingV1(
   version="2017-02-27")
 
 def watson_analyses(query):
-    response = natural_language_understanding.analyze(
-      text=query,
-      features=[
-        Features.Entities(
-          emotion=True,
-          sentiment=True,
-          limit=4
-        ),
-        Features.Keywords(
-          emotion=True,
-          sentiment=True,
-          limit=4
-        )
-      ]
-    )
-    return response
+  try:
+      response = natural_language_understanding.analyze(
+        text=query,
+        features=[
+          Features.Entities(
+            emotion=True,
+            sentiment=True,
+            limit=4
+          ),
+          Features.Keywords(
+            emotion=True,
+            sentiment=True,
+            limit=4
+          )
+        ]
+      )
+  except Exception, e:
+      response = {}
+  return response
 
-def analyze(query, value):
+def analyze(query, value, sources):
     response = watson_analyses(query)
     respDict = json.loads(json.dumps(response))
     respDict['percentage'] = value
+    respDict['sources'] = sources
     return respDict
 

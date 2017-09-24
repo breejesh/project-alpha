@@ -5,6 +5,7 @@ import sys
 import re
 # from connection import db
 
+print "Starting.."
 # Firebase connection
 config = {
   "apiKey": " AIzaSyBHCAsvRwt-NMLsv4F1222SNXoQeyNQbzE ",
@@ -17,9 +18,10 @@ firebase.auth()
 db = firebase.database()
 clear_stuff = {}
 clear_stuff["users"] = 0
+print "Clearing database.."
 db.update(clear_stuff)
-print "db cleared"
-
+print "Database cleared!"
+print "Next.."
 def process_text(text):
     text = text.lower().encode('utf-8')
     text = re.sub(r"http\S+", '', text)

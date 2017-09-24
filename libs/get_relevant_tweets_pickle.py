@@ -3,6 +3,7 @@ import pyrebase
 from connection import db, api
 import json
 import re
+import pickle
 
 users = ["@timesofindia","@ndtv","@IndiaToday","@CNNnews18","@bsindia","@dna","@BreakingNews","@BBCBreaking"]
 def combination(s):
@@ -10,20 +11,10 @@ def combination(s):
 
 def load_data():
     tweet = {}
-    try:
-        for user in users:
-            user_tweet = {}
-            print user
-            try:
-                data = db.child("users").child(user.lstrip('@')).get()
-            except Exception, e:
-                print "Firebase Error"
-            for j, (id, text) in enumerate(data.val().iteritems()):
-                    # In each tweets find keywords
-                    user_tweet[id] = text[0]
-            tweet[user] = user_tweet
-    except Exception, e:
-        print e
+    print "Loading pickle file.."
+    with open('data/tweet_data.pickle', 'rb') as handle:
+        tweet = pickle.load(handle)
+    print "Pickle file loaded!"
     return tweet
 
 # Returns a list of relevant tweets as list based on keyword
@@ -37,7 +28,7 @@ def find_all(keywords):
         try:
             i = len(words)
             while(True):
-                print words[i - 1]
+                #print words[i - 1]
                 if(i == 1):
                     break
                 i -= 1
@@ -46,6 +37,7 @@ def find_all(keywords):
                 for tweet_id, tweet in data[user].iteritems():
                     # In each tweets find keywords
                     new_tweet = tweet.split(" ")
+                    
                     if set(words[i]) < set(new_tweet) :
                         relevant_tweets.append(tweet)
                         print tweet

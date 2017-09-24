@@ -83,7 +83,9 @@ def my_sentence_similarity(sentence1, sentence2):
                     if token.lower() not in stopwords]
     tokens_b = [token.lower() for token in synsets2 \
                     if token.lower() not in stopwords]
-    #print tokens_a, tokens_b
+
+    if set(tokens_a) <= set(tokens_b):
+        return 0.45
     stems_a = [stemmer.stem(token) for token in tokens_a]
     stems_b = [stemmer.stem(token) for token in tokens_b]
     #print stems_a, stems_b

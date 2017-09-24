@@ -3,6 +3,7 @@ import pyrebase
 from connection import db, api
 import json
 import re
+import pickle
 
 users = ["@timesofindia","@ndtv","@IndiaToday","@CNNnews18","@bsindia","@dna","@BreakingNews","@BBCBreaking"]
 def combination(s):
@@ -30,6 +31,10 @@ def load_data():
         print e
         tweet = {}
         return tweet            
+    with open('data/tweet_data.pickle', 'wb') as handle:
+        print "Saving pickle file..."
+        pickle.dump(tweet, handle, protocol=pickle.HIGHEST_PROTOCOL)
+        print "Pickle file saved!"
     return tweet
 
 # Returns a list of relevant tweets as list based on keyword
