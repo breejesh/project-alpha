@@ -10,12 +10,6 @@ from connection import db, api
 users = ["@sardesairajdeep","@BDUTT","@sagarikaghose","@vikramchandra","@asharma","@SachinKalbag","@madversity","@cricketwallah","@Kanchangupta","@rahulkanwal","@timesofindia","@ndtv","@IndiaToday","@IndianExpress","@the_hindu","@CNNnews18","@firstpost","@bsindia","@dna","@DeccanChronicle","@Oneindia","@FinancialXpress","@BreakingNews","@BBCBreaking","@cnnbrk","@WSJbreakingnews","@CBSNews"]
 
 def process_new_tweets():
-    # Get tweet for particular screen name
-    '''
-    data = db.child("users").child("@sagarikaghose").get()
-    print type(data.val())
-    print data.val()
-    '''
     for user in users:
         # Fetch  tweet id from Firebase
         try:
