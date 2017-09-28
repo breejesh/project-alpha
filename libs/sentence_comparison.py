@@ -68,7 +68,8 @@ def word_relevant_to_sentence(sentence, word, threshold = 0.6):
 
 def my_sentence_similarity(sentence1, sentence2):
     # sentence 1 is always to source
-    source = sentence1.lower()
+    sentence1 = sentence1.lower()
+    sentence2 = sentence2.lower()
     sentence1 = pos_tag(word_tokenize(sentence1))
     sentence2 = pos_tag(word_tokenize(sentence2))
     #print sentence1, sentence2

@@ -7,8 +7,8 @@ class Response(object):
         self.__dict__ = json.loads(j)
 
 natural_language_understanding = NaturalLanguageUnderstandingV1(
-  username="9ebd6c29-f3f3-462a-800d-764229422282",
-  password="FJVM0P5ccuFP",
+  username="b6285e8a-94f0-4e93-a272-e8544d44714d",
+  password="JWIggRdPnWMf",
   version="2017-02-27")
 
 def watson_analyses(query):

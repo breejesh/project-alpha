@@ -16,7 +16,7 @@ def load_data():
         with open('data/tweet_data.pickle', 'rb') as handle:
             tweet = pickle.load(handle)
     except:
-        with open('/home/himanhsu/Desktop/Hackocracy/project_alpha/data/tweet_data.pickle', 'rb') as handle:
+        with open('/home/ryuzaki/mysite/data/tweet_data.pickle', 'rb') as handle:
             tweet = pickle.load(handle)        
     print "Pickle file loaded!"
     return tweet
