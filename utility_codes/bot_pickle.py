@@ -15,7 +15,7 @@ def load_data():
     tweet = {}
     print "Loading pickle file.."
     try:
-        with open('../data/tweet_data.pickle', 'rb') as handle:
+        with open('data/tweet_data.pickle', 'rb') as handle:
             tweet = pickle.load(handle)
     except:
         with open('/home/himanhsu/Desktop/Hackocracy/project_alpha/data/tweet_data.pickle', 'rb') as handle:
