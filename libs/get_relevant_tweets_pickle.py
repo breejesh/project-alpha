@@ -16,12 +16,39 @@ def load_data():
         with open('data/tweet_data.pickle', 'rb') as handle:
             tweet = pickle.load(handle)
     except:
-        with open('/home/ryuzaki/mysite/data/tweet_data.pickle', 'rb') as handle:
+        with open('/home/himanhsu/Desktop/Hackocracy/project_alpha/data/tweet_data.pickle', 'rb') as handle:
             tweet = pickle.load(handle)        
     print "Pickle file loaded!"
     return tweet
+def find_all(keywords):
+    relevant_tweets = []
+    for user in users:
+        print user
+        flag = 0
+        user_tweet = {}
+        min_intersection = 2 
+        try:
+            #print words[i - 1]
+            for tweet_id, tweet in data[user].iteritems():
+                # In each tweets find keywords
+                new_tweet = tweet.split(" ")
+                matched_keywords = len(list(set(new_tweet).intersection(keywords))) 
+                if matched_keywords not in new_tweet:
+                    if matched_keywords >= min_intersection: 
+                        user_tweet[matched_keywords] = tweet
+                        flag = 1
+            if flag == 0:
+                relevant_tweets.append(' ')
+            else:
+                relevant_tweets.append(user_tweet[max(user_tweet)])
+        except Exception as e:
+            print str(user) + " caused " + str(e.message)
+    print relevant_tweets
+    return relevant_tweets
 
-# Returns a list of relevant tweets as list based on keyword
+data = load_data()
+
+'''
 def find_all(keywords):
     # Create a search pattern
     relevant_tweets = []
@@ -54,5 +81,4 @@ def find_all(keywords):
         except Exception as e:
             print str(user) + " caused " + str(e.message)
     return relevant_tweets
-
-data = load_data()
+'''
