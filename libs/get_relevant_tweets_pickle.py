@@ -4,8 +4,8 @@ from connection import db, api
 import json
 import re
 import pickle
-
 users = ["@timesofindia","@ndtv","@IndiaToday","@CNNnews18","@bsindia","@dna","@BreakingNews","@BBCBreaking"]
+
 def combination(s):
     return [[s[j] for j in xrange(len(s)) if (i&(1<<j))] for i in xrange(1<<len(s))]
 
