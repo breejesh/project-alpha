@@ -20,6 +20,7 @@ def load_data():
             tweet = pickle.load(handle)        
     print "Pickle file loaded!"
     return tweet
+
 def find_all(keywords):
     relevant_tweets = []
     for user in users:
