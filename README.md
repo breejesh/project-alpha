@@ -32,7 +32,7 @@ Simply go to [truenet.cf](http://truenet.cf) and use it via our website.
 *NOTE: The database we have used to analyse queries was last updated on 25th September, 2017. Queries pertaining to events occurring post 25th September will not produce accurate results. The reason for maintaining an offline database of our sources was to increase speed and efficiency. In the future, we plan to update the database periodically.*
 
 # Flow
-![image](https://i.imgur.com/qb9Z11i.png)
+![image](https://i.imgur.com/E6AR3ZO.png)
 
 # Video demonstration
 Click the below image to view the video
